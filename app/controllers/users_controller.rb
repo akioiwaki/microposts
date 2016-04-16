@@ -18,21 +18,26 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = User.edit(params[:id])
-     
+    # @user = User.find(params[:id])
+    # if @user.save
+    #   flash[:success] = "プロフィールが変更されました"
+    #   redirect_to @user
+    # else
+    #   render 'edit'
+    # end
   end
-end
   
   def update
-    @user = User.update(params[:id])
+    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-    else
+    else 
       render 'edit'
     end
+  end
     
     def destroy
-      @user.destroy
-      redirect_to root_path, notice: 'プロフィールを削除しました'
+      session[:user_id] = nil
+      redirect_to root_path
     end
     
   private
@@ -41,4 +46,4 @@ end
       params.require(:user).permit(:name, :email, :region, :profile, :password,
                                    :password_confirmation)
     end
-  end
+end
