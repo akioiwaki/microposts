@@ -12,11 +12,4 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
-  
-    
-    def user_authrization
-      if current_user != micropost.user
-        redirect_to root_path
-      end
-    end
 end
